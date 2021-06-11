@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tyvalia Launcher - v0.3.0-.1</title>
+    </head>
+    <body>
+        <link rel="stylesheet" href="style.css" />
+        <script src="renderer.js"></script>
+
+        <video autoplay loop poster="" id="backgroundVideo">
+            <source src="resources/background.webm" type="video/webm" />
+            <source src="resources/background.mp4" type="video/mp4" />
+        </video>
+
+        <audio autoplay controls id="musicPlayer">
+            <source src="resources/backgroundMusic.mp3" />
+        </audio>
+
+        <header>
+            <img src="resources/logo.png" alt="Tyvalia RP Logo" id="logo" />
+        </header>
+
+        <div id="content">
+            <div class="centerContainer">
+                <div id="form" class="form center">
+                    <span class="title">Connexion</span><br />
+                    <hr />
+                    <div class="middle">
+                        <label for="username" class="username-label">Pseudo : </label><br /><span id="errorMessageUsername">Veuillez mettre un pseudo valide !</span>
+                        <input type="text" name="username" id="username" placeholder="Pseudo" maxlength="16"><br />
+                    </div>
+                    <br />
+                    <div class="bottom">
+                        <input type="submit" id="submitButton" name="play" value="Jouer" onclick="launchButton()">
+                        <span id="launchMessage"><br />0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<button onclick="launchButton()">Launch</button>-->
+    </body>
+</html>
