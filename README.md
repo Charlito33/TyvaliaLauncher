@@ -5,5 +5,5 @@ Official TyvaliaRP Launcher
 
 **Versions :** *(Start at 0.3.0, see old repository for older versions)*
 
-  0.3.0-Snapshot :
-    - Add proxies for avoid server crashes
+### 0.3.0-Snapshot :
+    - Added proxies for avoid server crashes
