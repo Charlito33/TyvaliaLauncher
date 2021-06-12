@@ -7,3 +7,5 @@ Official TyvaliaRP Launcher
 
 ### 0.3.0-Snapshot :
     - Added proxies for avoid server crashes
+
+**Warning !** Commit Failed, Between Build 1 and 3 the commits are maybe inexacts
