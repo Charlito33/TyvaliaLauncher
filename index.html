@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Tyvalia Launcher - v0.3.0-.2</title>
+        <title>Tyvalia Launcher - v0.3.0-.3</title>
     </head>
     <body>
         <link rel="stylesheet" href="style.css" />
@@ -16,6 +16,11 @@
         <audio autoplay controls id="musicPlayer">
             <source src="resources/backgroundMusic.mp3" />
         </audio>
+
+        <div id="ram-selector-div">
+            RAM : <span id="ram">2</span>GB
+            <input id="ram-selector" type="range" min="2" max="2" step="1" />
+        </div>
 
         <header>
             <img src="resources/logo.png" alt="Tyvalia RP Logo" id="logo" />

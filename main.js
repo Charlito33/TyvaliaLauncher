@@ -1,6 +1,16 @@
 const {app, BrowserWindow} = require('electron');
 const {ipcMain, dialog} = require('electron');
 const proxiesChecker = require('./proxies-checker');
+const os = require('os');
+const Store = require("./storage.js");
+
+const store = new Store({
+    configName: 'user-preferences',
+    defaults: {
+        username: "",
+        ram: 2
+    }
+});
 
 const getAppDataPath = require('appdata-path');
 const {Menu} = require("electron");
@@ -17,6 +27,8 @@ let proxiesListPath = "/raw/nasFzNFe";
 
 let appReady = false;
 let proxy = "";
+
+let totalRAM = Math.round(os.totalmem() / 1024 / 1024 / 1024);
 
 proxiesChecker.getProxiesList(proxiesListHost, proxiesListPath).then((data) => {
     console.log("Proxies : " + data);
@@ -50,10 +62,13 @@ client.updatePresence({
 });
 
 async function launchGame(args) {
-    await gameLaunch(args[0]);
+    console.log("Launching Game with :");
+    console.log("- Username : " + args[0]);
+    console.log("- RAM : " + args[1]);
+    await gameLaunch(args[0], args[1]);
 }
 
-async function gameLaunch(username) {
+async function gameLaunch(username, ram) {
     let opts = {
         clientPackage: proxy + "/modpack.zip",
         authorization: Authenticator.getAuth(username),
@@ -64,7 +79,7 @@ async function gameLaunch(username) {
         },
         memory: {
             max: "6G",
-            min: "3500M"
+            min: ram + "G"
         },
         forge: gamePath + "\\bin\\modpack.jar"
     };
@@ -117,13 +132,22 @@ app.on('activate', () => {
    }
 });
 
+ipcMain.handle('load', (event, ...args) => {
+    rendererProcess = event.sender;
+
+    event.sender.send("getTotalRAM", totalRAM);
+    event.sender.send("setPreferences", store.get("username"), store.get("ram"));
+});
+
+ipcMain.handle('setPreference', (event, ...args) => {
+   store.set(args[0], args[1]);
+});
+
 ipcMain.handle('launch', (event, ...args) => {
     if (args[0] === undefined || args[0] === "") {
         event.sender.send("noUsername");
     } else {
-        rendererProcess = event.sender;
         event.sender.send("launch");
         launchGame(args);
     }
-
 });

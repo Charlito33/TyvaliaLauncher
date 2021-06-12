@@ -129,3 +129,20 @@ audio {
 .username-label {
     font-size: 22px;
 }
+
+#ram-selector-div {
+    font-family: Poppins, serif;
+
+    text-align: center;
+    color: white;
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    padding: 1%;
+
+    width: 22%;
+    height: 9%;
+}
