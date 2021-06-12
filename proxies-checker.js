@@ -1,5 +1,4 @@
 const https = require("https");
-const ping = require("ping");
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -53,10 +52,10 @@ function pingProxiesList(proxies) {
             hostCheck = hostCheck.replace("http://", "");
             hostCheck = hostCheck.split("/")[0];
 
-            ping.sys.probe(hostCheck, function (isAlive) {
-               if (isAlive) {
-                   aliveProxies.push(host);
-               }
+            pingUrl(hostCheck).then((isAlive) => {
+                if (isAlive) {
+                    aliveProxies.push(host);
+                }
 
                 checked++;
 
@@ -65,6 +64,26 @@ function pingProxiesList(proxies) {
                 }
             });
         });
+    });
+}
+
+function pingUrl(url) {
+    return new Promise((resolve, reject) =>  {
+        let options = {
+            host: url,
+            path: "/404"
+        };
+
+        let res = https.request(options, (res) => {
+            res.on("data", () => {
+               resolve(true);
+            });
+        });
+        res.on("error", (e) => {
+            console.log("Ping Error : " + e);
+            resolve(false);
+        });
+        res.end();
     });
 }
 
