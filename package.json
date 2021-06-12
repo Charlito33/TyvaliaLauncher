@@ -1,6 +1,6 @@
 {
   "name": "tyvalialauncher",
-  "version": "0.3.0-.3",
+  "version": "0.3.0-.4",
   "description": "The official TyvaliaRP Launcher",
   "main": "main.js",
   "scripts": {

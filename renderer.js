@@ -45,12 +45,6 @@ window.addEventListener('load', (event) => {
         document.getElementById("ram").innerHTML = selectedRAM;
     });
 
-    document.getElementById("submitButton").addEventListener("click", (event) => {
-        if (document.getElementById("username") !== undefined && document.getElementById("username") !== "") {
-            setCookie("username", btoa(document.getElementById("username").value));
-        }
-    });
-
     document.getElementById("musicPlayer").volume = 0.2;
     document.getElementById("errorMessageUsername").style.display = "none";
     document.getElementById("launchMessage").style.display = "none";

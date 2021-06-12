@@ -78,8 +78,8 @@ async function gameLaunch(username, ram) {
             type: "release"
         },
         memory: {
-            max: "6G",
-            min: ram + "G"
+            max: ram + "G",
+            min: "2G"
         },
         forge: gamePath + "\\bin\\modpack.jar"
     };
